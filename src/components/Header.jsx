@@ -131,6 +131,21 @@ const Header = () => {
     tap: { y: 0 },
   }
 
+  const handleDownloadResume = () => {
+    // Create a link element
+    const link = document.createElement("a")
+    // Set the href to the path of your resume file
+    link.href = "/assets/Saharsh_Resume.pdf"
+    // Set the download attribute to suggest a filename
+    link.download = "Saharsh_Resume.pdf"
+    // Append to the document
+    document.body.appendChild(link)
+    // Trigger the click event
+    link.click()
+    // Clean up
+    document.body.removeChild(link)
+  }
+
   return (
     <motion.header
       initial="initial"
@@ -200,7 +215,7 @@ const Header = () => {
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button variant="outline" size="sm" asChild>
-                    <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+                    <a target="_blank" rel="noopener noreferrer" style={{ cursor: 'pointer' }} onClick={handleDownloadResume}>
                       Resume
                     </a>
                   </Button>

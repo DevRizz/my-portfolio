@@ -504,6 +504,21 @@ const Hero = () => {
     },
   }
 
+  const handleDownloadResume = () => {
+    // Create a link element
+    const link = document.createElement("a")
+    // Set the href to the path of your resume file
+    link.href = "/assets/Saharsh_Resume.pdf"
+    // Set the download attribute to suggest a filename
+    link.download = "Saharsh_Resume.pdf"
+    // Append to the document
+    document.body.appendChild(link)
+    // Trigger the click event
+    link.click()
+    // Clean up
+    document.body.removeChild(link)
+  }
+
   // Additional tech badges
   const techBadges = [
     { name: "React", color: "text-blue-600", position: "top-5 right-10" },
@@ -579,10 +594,10 @@ const Hero = () => {
                   size="lg"
                   className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-700 font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
                 >
-                  <a href="/Saharsh_Resume.pdf" download="Saharsh_Resume.pdf">
+                  <button onClick={handleDownloadResume}>
                     <FileText className="w-5 h-5 mr-2" />
                     Download CV
-                  </a>
+                  </button>
                 </Button>
               </div>
 

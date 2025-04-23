@@ -356,40 +356,24 @@ const experiences = [
   {
     organization: "Innomatics Research Lab",
     role: "Full Stack Developer",
-    duration: "Sep 2023 - Nov 2023",
+    duration: "Sep 2024 - Nov 2024",
     location: "Hyderabad",
     description:
       "Developed a full-stack e-commerce platform with features like user authentication, product management, product listings, shopping cart, order processing, and order history. Utilized React for the frontend and Node.js with Express.js for the backend, and MongoDB for the database.",
     skills: ["React", "Node.js", "Express.js", "MongoDB"],
     achievements: [
-      "Implemented responsive design that improved mobile user engagement by 40%",
+      "Implemented responsive design that improved mobile user engagement by 40% using inverted indexing",
       "Reduced page load time by 30% through code optimization",
-      "Integrated secure payment gateway with 99.9% transaction success rate",
+      "Integrated secure payment gateway with 89.9% transaction success rate",
     ],
-    link: "https://example.com/project",
+    link: "https://github.com/DevRizz",
     type: "work",
   },
   {
-    organization: "TechNova Solutions",
-    role: "Frontend Developer Intern",
-    duration: "May 2023 - Aug 2023",
-    location: "Remote",
-    description:
-      "Collaborated with a team of developers to build and maintain responsive web applications. Focused on implementing UI components and integrating with backend APIs. Participated in code reviews and agile development processes.",
-    skills: ["React", "TypeScript", "Tailwind CSS", "RESTful APIs"],
-    achievements: [
-      "Developed 15+ reusable UI components that reduced development time by 25%",
-      "Improved application accessibility to meet WCAG 2.1 AA standards",
-      "Participated in daily stand-ups and bi-weekly sprint planning sessions",
-    ],
-    link: "https://technova-solutions.com",
-    type: "work",
-  },
-  {
-    organization: "IIIT Dharwad",
+    organization: "IIT Hyderabad",
     role: "Research Assistant",
-    duration: "Jan 2023 - Apr 2023",
-    location: "Dharwad",
+    duration: "April 2025 - May 2025",
+    location: "Hyderabad",
     description:
       "Assisted in research on machine learning applications for natural language processing. Implemented and tested various algorithms for sentiment analysis and text classification. Contributed to a research paper on efficient text processing techniques.",
     skills: ["Python", "TensorFlow", "NLP", "Data Analysis"],
@@ -398,7 +382,7 @@ const experiences = [
       "Optimized data preprocessing pipeline reducing processing time by 35%",
       "Co-authored a research paper submitted to an international conference",
     ],
-    link: "https://iiitdwd.ac.in/research.php",
+    link: "https://research.iith.ac.in/",
     type: "research",
   },
   {

@@ -631,6 +631,8 @@ import {
   Book,
   PenToolIcon as Tool,
   Terminal,
+  Atom,
+  Brain,
 } from "lucide-react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { Button } from "./ui/button"
@@ -640,7 +642,7 @@ import { Tabs, TabsList, TabsTrigger } from "./ui/tabs"
 import { Card } from "./ui/card"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip"
 
-// Extended project data with more projects
+// Updated project data with the requested changes
 const projectsData = [
   {
     title: "Blog Application",
@@ -655,29 +657,76 @@ const projectsData = [
       "A comprehensive blogging platform with user authentication, rich text editing, comment system, and responsive design. Users can create, edit, and delete posts, follow other users, and receive notifications.",
   },
   {
-    title: "Personal ChatGPT",
-    description:
-      "A conversational AI application designed to assist with various tasks, providing instant responses and personalized interactions.",
-    image: "/assets/images/SABOT.png",
-    technologies: ["React", "Gemini API", "Material-UI"],
-    githubLink: "https://github.com/Slygriyrsk/sabot-gpt",
-    liveLink: "https://cool-sabotgpt.netlify.app/",
+    title: "ChatGPT Clone",
+    description: "An advanced AI chat application with OpenAI integration and conversation memory.",
+    image: "/assets/images/chatgpt.png",
+    technologies: ["Next.js", "OpenAI API", "Tailwind CSS", "Vercel AI SDK"],
+    githubLink: "https://github.com/Slygriyrsk/advanced-AIGPT",
+    liveLink: "https://insightviz.netlify.app/",
     category: "AI",
     featured: true,
     longDescription:
-      "An AI assistant that leverages the Gemini API to provide intelligent responses to user queries. Features include conversation history, voice input/output, and customizable UI themes.",
+      "A feature-rich ChatGPT clone that uses the OpenAI API to generate human-like responses. Includes features like conversation history, multiple chat sessions, code highlighting, and markdown support. The application also supports image generation and voice input capabilities.",
   },
   {
-    title: "Weather Forecast Dashboard",
-    description: "A weather forecast dashboard using OpenWeatherMap API and Chart.js.",
-    image: "/assets/images/weather.png",
-    technologies: ["JavaScript", "Chart.js", "API Integration"],
-    githubLink: "https://github.com/Slygriyrsk/my-weather-app",
-    liveLink: "https://coolweatherforecast-app.netlify.app/",
-    category: "Frontend",
-    featured: false,
+    title: "Emotion Recognition in Conversation",
+    description: "A real-time ERC system using HingBERT-LSTM for Hindi-English code-mixed dialogues.",
+    image: "/assets/images/bert.png",
+    technologies: ["Python", "Transformers", "BERT", "LSTM", "NLP"],
+    githubLink: "https://colab.research.google.com/drive/1EA-WKRfhI9RtRekauXaBUSkqHufwKvcl?usp=sharing", // update if different
+    liveLink: "https://colab.research.google.com/drive/1EA-WKRfhI9RtRekauXaBUSkqHufwKvcl?usp=sharing",
+    category: "AI/ML",
+    featured: true,
     longDescription:
-      "A comprehensive weather application that provides current conditions, hourly forecasts, and 7-day predictions. Features interactive charts for temperature, precipitation, and wind speed trends.",
+      "This project develops an Emotion Recognition in Conversations (ERC) system using a fine-tuned BERT model with speaker embeddings and a bidirectional LSTM classifier to predict emotions in Hindi-English code-mixed dialogues. The HingBERT-LSTM model achieves a weighted F1 score of 0.3753, outperforming Base LLaMA, Quantized LLaMA, and LoRA LLaMA, with strong performance on neutral and joy emotions. It includes a conversational interface for real-time emotion detection, supported by dynamic visualizations that highlight emotion shifts and training behaviors. The project tackles challenges such as class imbalance and contextual modeling, with a focus on robust multilingual emotion understanding.",
+  },  
+  {
+    title: "Land Classification Machine Learning Project",
+    description: "A machine learning system for satellite image analysis and land classification.",
+    image: "/assets/images/soil.png",
+    technologies: ["Python", "TensorFlow", "Keras", "Satellite Imagery"],
+    githubLink: "https://github.com/Slygriyrsk/LandClassification",
+    liveLink: "https://soil-quality-analysis-sn9ysnkomv4jzeotnhbnxb.streamlit.app/",
+    category: "Machine Learning",
+    featured: true,
+    longDescription:
+      "A sophisticated machine learning project that uses convolutional neural networks to classify land types from satellite imagery. The system can identify urban areas, forests, agricultural land, water bodies, and more with high accuracy. Features include interactive map visualization, historical change detection, and exportable reports. The model was trained on a diverse dataset of satellite images from different geographical regions and seasons.",
+  },
+  {
+    title: "Quantum Simulator",
+    description: "A quantum computing simulator for educational and research purposes.",
+    image: "/assets/images/qc.png",
+    technologies: ["Python", "Qiskit", "quNetSim", "BB84"],
+    githubLink: "https://github.com/Slygriyrsk/quantum-communication-simulator",
+    liveLink: "https://devrizz.github.io/quantum-communication-simulator/",
+    category: "Quantum Computing",
+    featured: true,
+    longDescription:
+      "An interactive quantum computing simulator that allows users to design, visualize, and execute quantum circuits. The application supports various quantum gates, multi-qubit operations, and measurement capabilities. It includes educational modules explaining quantum computing concepts and visualizations of quantum states and probabilities. Ideal for students, researchers, and quantum computing enthusiasts.",
+  },
+  {
+    title: "Healthcare Management Application",
+    description: "A comprehensive healthcare management system for patients, doctors, and administrators.",
+    image: "/assets/images/health.jpg",
+    technologies: ["React", "Node.js", "PostgreSQL", "Socket.io"],
+    githubLink: "https://github.com/Slygriyrsk/healthcare-hub",
+    liveLink: "https://github.com/Slygriyrsk/healthcare-hub",
+    category: "Full Stack",
+    featured: true,
+    longDescription:
+      "A full-featured healthcare management application that streamlines patient care and administrative tasks. Features include appointment scheduling, electronic health records, prescription management, billing integration, and secure messaging between patients and healthcare providers. The system also includes analytics dashboards for administrators to monitor key performance indicators.",
+  },
+  {
+    title: "E-commerce Platform",
+    description: "A full-featured online store with product catalog, shopping cart, and payment processing.",
+    image: "/assets/images/e-commerce.png",
+    technologies: ["Next.js", "Stripe", "MongoDB", "Tailwind CSS"],
+    githubLink: "https://github.com/DevRizz/unstop-task?tab=readme-ov-file",
+    liveLink: "https://mytalorzone-frontend.vercel.app/",
+    category: "Full Stack",
+    featured: true,
+    longDescription:
+      "A modern e-commerce solution with product search, filtering, user accounts, order tracking, and secure payment processing via Stripe. Features an admin dashboard for inventory management.",
   },
   {
     title: "TypeScript Algorithm and Data Structures Library",
@@ -702,67 +751,7 @@ const projectsData = [
     featured: false,
     longDescription:
       "A simplified browser rendering engine built from scratch that parses HTML and CSS to create a visual representation. Includes basic JavaScript interpretation and DOM manipulation capabilities.",
-  },
-  {
-    title: "E-commerce Platform",
-    description: "A full-featured online store with product catalog, shopping cart, and payment processing.",
-    image: "/placeholder.svg?height=300&width=400",
-    technologies: ["Next.js", "Stripe", "MongoDB", "Tailwind CSS"],
-    githubLink: "https://github.com/Slygriyrsk/ecommerce-platform",
-    liveLink: "https://ecommerce-platform-demo.vercel.app/",
-    category: "Full Stack",
-    featured: true,
-    longDescription:
-      "A modern e-commerce solution with product search, filtering, user accounts, order tracking, and secure payment processing via Stripe. Features an admin dashboard for inventory management.",
-  },
-  {
-    title: "Task Management App",
-    description: "A Kanban-style task management application with drag-and-drop functionality.",
-    image: "/placeholder.svg?height=300&width=400",
-    technologies: ["React", "Redux", "Firebase", "React DnD"],
-    githubLink: "https://github.com/Slygriyrsk/task-manager",
-    liveLink: "https://task-manager-demo.netlify.app/",
-    category: "Frontend",
-    featured: false,
-    longDescription:
-      "A productivity tool that helps users organize tasks using a Kanban board interface. Features include task categorization, due dates, priority levels, and team collaboration capabilities.",
-  },
-  {
-    title: "Fitness Tracker",
-    description: "A mobile-first web application for tracking workouts and nutrition.",
-    image: "/placeholder.svg?height=300&width=400",
-    technologies: ["React Native", "GraphQL", "Apollo", "MongoDB"],
-    githubLink: "https://github.com/Slygriyrsk/fitness-tracker",
-    liveLink: "https://fitness-tracker-demo.vercel.app/",
-    category: "Mobile",
-    featured: false,
-    longDescription:
-      "A comprehensive fitness application that allows users to track workouts, set goals, monitor nutrition, and visualize progress over time with interactive charts and statistics.",
-  },
-  {
-    title: "Real-time Collaborative Editor",
-    description: "A Google Docs-like collaborative text editor with real-time synchronization.",
-    image: "/placeholder.svg?height=300&width=400",
-    technologies: ["React", "Socket.io", "Express", "MongoDB"],
-    githubLink: "https://github.com/Slygriyrsk/collaborative-editor",
-    liveLink: "https://collaborative-editor-demo.herokuapp.com/",
-    category: "Full Stack",
-    featured: true,
-    longDescription:
-      "A real-time collaborative document editor that allows multiple users to edit the same document simultaneously. Features include cursor tracking, version history, and document sharing capabilities.",
-  },
-  {
-    title: "Portfolio Website Generator",
-    description: "A tool that generates customizable portfolio websites for developers.",
-    image: "/placeholder.svg?height=300&width=400",
-    technologies: ["Next.js", "Tailwind CSS", "Vercel", "MDX"],
-    githubLink: "https://github.com/Slygriyrsk/portfolio-generator",
-    liveLink: "https://portfolio-generator-demo.vercel.app/",
-    category: "Tool",
-    featured: false,
-    longDescription:
-      "A web application that allows developers to create professional portfolio websites by inputting their information and selecting from various templates and themes. Includes automatic deployment to Vercel.",
-  },
+  }
 ]
 
 // Extract all unique technologies for filtering
@@ -782,13 +771,17 @@ const getCategoryIcon = (category) => {
     case "Mobile":
       return <Smartphone className="w-4 h-4" />
     case "AI":
-      return <Cpu className="w-4 h-4" />
+      return <Brain className="w-4 h-4" />
     case "Library":
       return <Book className="w-4 h-4" />
     case "Tool":
       return <Tool className="w-4 h-4" />
     case "Systems":
       return <Terminal className="w-4 h-4" />
+    case "Quantum Computing":
+      return <Atom className="w-4 h-4" />
+    case "Machine Learning":
+      return <Cpu className="w-4 h-4" />
     default:
       return <Code className="w-4 h-4" />
   }
