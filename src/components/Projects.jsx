@@ -645,17 +645,17 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/t
 // Updated project data with the requested changes
 const projectsData = [
   {
-    title: "Blog Application",
-    description: "A full-stack blog platform built with React, Node.js, and MongoDB.",
-    image: "/assets/images/blog.png",
-    technologies: ["React", "Node.js", "MongoDB", "Express"],
-    githubLink: "https://github.com/Slygriyrsk/Blog-mern",
-    liveLink: "https://github.com/Slygriyrsk/Blog-mern",
-    category: "Full Stack",
+    title: "Apple Website Clone",
+    description: "A stunning 3D Apple product showcase built with Three.js, replicating the iconic Apple design and interactivity.",
+    image: "/assets/images/apple.png",
+    technologies: ["Three.js", "React", "GSAP", "Tailwind CSS"],
+    githubLink: "https://github.com/Slygriyrsk/apple-web-clone",
+    liveLink: "https://orchardaura.netlify.app/",
+    category: "3D",
     featured: true,
     longDescription:
-      "A comprehensive blogging platform with user authentication, rich text editing, comment system, and responsive design. Users can create, edit, and delete posts, follow other users, and receive notifications.",
-  },
+      "A visually immersive Apple website clone featuring 3D models, smooth scroll-triggered animations, and responsive design. Built with Three.js and GSAP for dynamic visuals, the project emulates Apple's elegant product storytelling. Includes custom shaders, camera motion, and scroll-based transitions to deliver a premium user experience.",
+  },  
   {
     title: "ChatGPT Clone",
     description: "An advanced AI chat application with OpenAI integration and conversation memory.",
@@ -715,6 +715,18 @@ const projectsData = [
     featured: true,
     longDescription:
       "A full-featured healthcare management application that streamlines patient care and administrative tasks. Features include appointment scheduling, electronic health records, prescription management, billing integration, and secure messaging between patients and healthcare providers. The system also includes analytics dashboards for administrators to monitor key performance indicators.",
+  },
+  {
+    title: "Blog Application",
+    description: "A full-stack blog platform built with React, Node.js, and MongoDB.",
+    image: "/assets/images/blog.png",
+    technologies: ["React", "Node.js", "MongoDB", "Express"],
+    githubLink: "https://github.com/Slygriyrsk/Blog-mern",
+    liveLink: "https://github.com/Slygriyrsk/Blog-mern",
+    category: "Full Stack",
+    featured: true,
+    longDescription:
+      "A comprehensive blogging platform with user authentication, rich text editing, comment system, and responsive design. Users can create, edit, and delete posts, follow other users, and receive notifications.",
   },
   {
     title: "E-commerce Platform",
