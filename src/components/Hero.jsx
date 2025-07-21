@@ -1,327 +1,3 @@
-// "use client"
-
-// import { useEffect, useRef } from "react"
-// import { motion } from "framer-motion"
-// import { Link } from "react-scroll"
-// import { ArrowDown, FileText, Mail, Github, Linkedin, Twitter } from 'lucide-react'
-// import { Button } from "./ui/button"
-// import { Badge } from "./ui/badge"
-// import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip"
-
-// const Hero = () => {
-//   const canvasRef = useRef(null)
-
-//   // Particle animation
-//   useEffect(() => {
-//     const canvas = canvasRef.current
-//     const ctx = canvas.getContext("2d")
-//     let animationFrameId
-//     let particles = []
-
-//     const resizeCanvas = () => {
-//       canvas.width = window.innerWidth
-//       canvas.height = window.innerHeight
-//       initParticles()
-//     }
-
-//     const initParticles = () => {
-//       particles = []
-//       const particleCount = Math.min(Math.floor(window.innerWidth / 10), 100)
-
-//       for (let i = 0; i < particleCount; i++) {
-//         particles.push({
-//           x: Math.random() * canvas.width,
-//           y: Math.random() * canvas.height,
-//           radius: Math.random() * 2 + 1,
-//           speedX: Math.random() * 1 - 0.5,
-//           speedY: Math.random() * 1 - 0.5,
-//           opacity: Math.random() * 0.5 + 0.2,
-//         })
-//       }
-//     }
-
-//     const drawParticles = () => {
-//       ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-//       particles.forEach((particle) => {
-//         ctx.beginPath()
-//         ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2)
-//         ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`
-//         ctx.fill()
-
-//         // Update position
-//         particle.x += particle.speedX
-//         particle.y += particle.speedY
-
-//         // Wrap around edges
-//         if (particle.x < 0) particle.x = canvas.width
-//         if (particle.x > canvas.width) particle.x = 0
-//         if (particle.y < 0) particle.y = canvas.height
-//         if (particle.y > canvas.height) particle.y = 0
-//       })
-
-//       // Draw connections between nearby particles
-//       particles.forEach((particle, i) => {
-//         for (let j = i + 1; j < particles.length; j++) {
-//           const dx = particle.x - particles[j].x
-//           const dy = particle.y - particles[j].y
-//           const distance = Math.sqrt(dx * dx + dy * dy)
-
-//           if (distance < 100) {
-//             ctx.beginPath()
-//             ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - distance / 100)})`
-//             ctx.lineWidth = 0.5
-//             ctx.moveTo(particle.x, particle.y)
-//             ctx.lineTo(particles[j].x, particles[j].y)
-//             ctx.stroke()
-//           }
-//         }
-//       })
-
-//       animationFrameId = requestAnimationFrame(drawParticles)
-//     }
-
-//     resizeCanvas()
-//     window.addEventListener("resize", resizeCanvas)
-//     drawParticles()
-
-//     return () => {
-//       window.removeEventListener("resize", resizeCanvas)
-//       cancelAnimationFrame(animationFrameId)
-//     }
-//   }, [])
-
-//   const socialLinks = [
-//     { icon: <Github className="w-5 h-5" />, href: "https://github.com/Slygriyrsk", label: "GitHub" },
-//     {
-//       icon: <Linkedin className="w-5 h-5" />,
-//       href: "https://www.linkedin.com/in/saharshkumar03/",
-//       label: "LinkedIn",
-//     },
-//     { icon: <Twitter className="w-5 h-5" />, href: "https://twitter.com/repatriation_23", label: "Twitter" },
-//   ]
-
-//   // Text animation variants
-//   const textVariants = {
-//     hidden: { opacity: 0 },
-//     visible: (i) => ({
-//       opacity: 1,
-//       transition: {
-//         delay: i * 0.1,
-//         duration: 0.8,
-//       },
-//     }),
-//   }
-
-//   // Badge animation variants
-//   const badgeVariants = {
-//     initial: { opacity: 0, scale: 0.8 },
-//     animate: (i) => ({
-//       opacity: 1,
-//       scale: 1,
-//       transition: {
-//         delay: i * 0.1 + 0.5,
-//         duration: 0.5,
-//       },
-//     }),
-//     hover: {
-//       scale: 1.05,
-//       transition: {
-//         duration: 0.2,
-//       },
-//     },
-//   }
-
-//   const handleDownloadResume = () => {
-//     // Create a link element
-//     const link = document.createElement("a")
-//     // Set the href to the path of your resume file
-//     link.href = "/assets/Saharsh_Resume.pdf"
-//     // Set the download attribute to suggest a filename
-//     link.download = "Saharsh_Resume.pdf"
-//     // Append to the document
-//     document.body.appendChild(link)
-//     // Trigger the click event
-//     link.click()
-//     // Clean up
-//     document.body.removeChild(link)
-//   }
-
-//   // Additional tech badges
-//   const techBadges = [
-//     { name: "React", color: "text-blue-600", position: "top-5 right-10" },
-//     { name: "Node.js", color: "text-green-600", position: "bottom-10 left-5" },
-//     { name: "JavaScript", color: "text-yellow-600", position: "bottom-20 right-0" },
-//     { name: "TypeScript", color: "text-blue-700", position: "top-20 left-5" },
-//     { name: "MongoDB", color: "text-green-700", position: "bottom-40 right-20" },
-//     { name: "Next.js", color: "text-gray-800 dark:text-gray-200", position: "top-40 right-5" },
-//     { name: "Tailwind CSS", color: "text-cyan-500", position: "bottom-5 right-40" },
-//     { name: "GraphQL", color: "text-pink-600", position: "top-10 left-20" },
-//   ]
-
-//   return (
-//     <section id="hero" className="min-h-screen flex items-center relative overflow-hidden">
-//       {/* Particle background */}
-//       <canvas ref={canvasRef} className="absolute inset-0 z-0" />
-
-//       {/* Gradient background */}
-//       <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-blue-700 to-purple-800 z-0"></div>
-
-//       {/* Content */}
-//       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-//         <div className="flex flex-col md:flex-row items-center">
-//           <motion.div
-//             initial={{ opacity: 0, y: 50 }}
-//             animate={{ opacity: 1, y: 0 }}
-//             transition={{ duration: 0.8 }}
-//             className="md:w-1/2 mb-8 md:mb-0"
-//           >
-//             <Badge className="mb-4 px-3 py-1 bg-white/20 text-white border-none backdrop-blur-sm">
-//               Full Stack Developer
-//             </Badge>
-
-//             <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white">
-//               <motion.span custom={0} initial="hidden" animate="visible" variants={textVariants} className="block">
-//                 Hi, I'm
-//               </motion.span>
-//               <motion.span
-//                 custom={1}
-//                 initial="hidden"
-//                 animate="visible"
-//                 variants={textVariants}
-//                 className="text-yellow-300 block mt-2"
-//               >
-//                 Saharsh Kumar
-//               </motion.span>
-//             </h1>
-
-//             <motion.div
-//               initial={{ opacity: 0, y: 20 }}
-//               animate={{ opacity: 1, y: 0 }}
-//               transition={{ delay: 0.4, duration: 0.8 }}
-//             >
-//               <p className="text-xl md:text-2xl mb-6 text-white/90 max-w-lg">
-//                 A passionate Full Stack Developer crafting elegant solutions and building amazing web experiences.
-//               </p>
-
-//               <div className="flex flex-wrap gap-4 mb-8">
-//                 <Button
-//                   asChild
-//                   size="lg"
-//                   className="bg-white text-blue-700 hover:bg-blue-50 hover:text-blue-800 font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-//                 >
-//                   <Link to="contact" smooth={true} duration={500}>
-//                     <Mail className="w-5 h-5 mr-2" />
-//                     Get in Touch
-//                   </Link>
-//                 </Button>
-
-//                 <Button
-//                   asChild
-//                   variant="outline"
-//                   size="lg"
-//                   className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-700 font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-//                 >
-//                   <button onClick={handleDownloadResume}>
-//                     <FileText className="w-5 h-5 mr-2" />
-//                     Download CV
-//                   </button>
-//                 </Button>
-//               </div>
-
-//               <div className="flex items-center space-x-4">
-//                 <span className="text-white/80">Connect with me:</span>
-//                 <div className="flex space-x-3">
-//                   {socialLinks.map((link, index) => (
-//                     <TooltipProvider key={index}>
-//                       <Tooltip>
-//                         <TooltipTrigger asChild>
-//                           <motion.a
-//                             href={link.href}
-//                             target="_blank"
-//                             rel="noopener noreferrer"
-//                             className="bg-white/10 hover:bg-white/20 p-2 rounded-full text-white transition-all duration-300 backdrop-blur-sm"
-//                             whileHover={{ scale: 1.1 }}
-//                             whileTap={{ scale: 0.95 }}
-//                           >
-//                             {link.icon}
-//                             <span className="sr-only">{link.label}</span>
-//                           </motion.a>
-//                         </TooltipTrigger>
-//                         <TooltipContent side="bottom">
-//                           <p>{link.label}</p>
-//                         </TooltipContent>
-//                       </Tooltip>
-//                     </TooltipProvider>
-//                   ))}
-//                 </div>
-//               </div>
-//             </motion.div>
-//           </motion.div>
-
-//           <motion.div
-//             initial={{ opacity: 0, scale: 0.8 }}
-//             animate={{ opacity: 1, scale: 1 }}
-//             transition={{ duration: 0.8 }}
-//             className="md:w-1/2 relative"
-//           >
-//             <div className="relative">
-//               {/* Decorative elements */}
-//               <div className="absolute -top-10 -right-10 w-40 h-40 bg-yellow-300/20 rounded-full filter blur-xl animate-pulse"></div>
-//               <div className="absolute -bottom-5 -left-5 w-32 h-32 bg-blue-300/20 rounded-full filter blur-xl animate-pulse"></div>
-
-//               {/* Profile image with frame */}
-//               <motion.div
-//                 className="w-64 h-64 md:w-80 md:h-80 mx-auto relative z-10 rounded-full p-2 bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-300 shadow-xl"
-//                 animate={{ rotate: [0, 2, 0, -2, 0] }}
-//                 transition={{ repeat: Number.POSITIVE_INFINITY, duration: 5, ease: "easeInOut" }}
-//               >
-//                 <div className="w-full h-full rounded-full overflow-hidden border-4 border-white">
-//                   <img src="/assets/images/me.jpg" alt="Saharsh Kumar" className="w-full h-full object-cover" />
-//                 </div>
-//               </motion.div>
-
-//               {/* Floating tech badges */}
-//               {techBadges.map((badge, index) => (
-//                 <motion.div
-//                   key={index}
-//                   custom={index}
-//                   variants={badgeVariants}
-//                   initial="initial"
-//                   animate="animate"
-//                   whileHover="hover"
-//                   className={`absolute ${badge.position} bg-white/90 dark:bg-gray-800/90 px-3 py-1 rounded-full shadow-lg backdrop-blur-sm`}
-//                 >
-//                   <span className={`${badge.color} font-medium text-sm`}>{badge.name}</span>
-//                 </motion.div>
-//               ))}
-//             </div>
-//           </motion.div>
-//         </div>
-
-//         <motion.div
-//           initial={{ opacity: 0, y: 20 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           transition={{ duration: 0.8, delay: 1.2 }}
-//           className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-//         >
-//           <Link to="about" smooth={true} duration={500} className="cursor-pointer">
-//             <motion.div
-//               animate={{ y: [0, 10, 0] }}
-//               transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5, ease: "easeInOut" }}
-//               className="bg-white/20 p-3 rounded-full backdrop-blur-sm hover:bg-white/30 transition-colors duration-300"
-//             >
-//               <ArrowDown className="w-6 h-6 text-white" />
-//             </motion.div>
-//           </Link>
-//         </motion.div>
-//       </div>
-//     </section>
-//   )
-// }
-
-// export default Hero
-
 "use client"
 
 import { useEffect, useRef, useState } from "react"
@@ -533,7 +209,7 @@ const Hero = () => {
                   className="text-xl lg:text-2xl text-blue-200/90 tracking-wide"
                   style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300 }}
                 >
-                  Full Stack Developer
+                  Learner & Developer
                 </span>
                 <div className="h-px w-12 bg-gradient-to-l from-transparent to-purple-400" />
               </motion.div>
@@ -547,8 +223,7 @@ const Hero = () => {
               className="text-lg lg:text-xl text-white/70 max-w-2xl leading-relaxed"
               style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, lineHeight: 1.7 }}
             >
-              Crafting exceptional digital experiences with precision and creativity. I transform complex problems into
-              elegant, scalable solutions.
+              I am always passionate about learning new things out there and donot hesitate to explore each domain. I also do DEV + DSA solving complex problems across different platforms.
             </motion.p>
 
             {/* Action Buttons */}
@@ -721,3 +396,441 @@ const Hero = () => {
 }
 
 export default Hero
+
+
+// "use client"
+// import { useEffect, useRef, useState } from "react"
+// import { motion, useScroll, useTransform } from "framer-motion"
+// import { Link } from "react-scroll"
+// import { ArrowDown, Github, Linkedin, Twitter, Rocket, Terminal } from "lucide-react"
+// import { Button } from "./ui/button"
+// import { Badge } from "./ui/badge"
+// import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip"
+
+// const Hero = () => {
+//   const containerRef = useRef(null)
+//   const { scrollYProgress } = useScroll({
+//     target: containerRef,
+//     offset: ["start start", "end start"],
+//   })
+//   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"])
+//   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+//   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+//   const [terminalText, setTerminalText] = useState("")
+//   const [showCursor, setShowCursor] = useState(true)
+
+//   const fullTerminalText =
+//     "I am always passionate about learning new things out there and do not hesitate to explore each domain. I also do DEV + DSA solving complex problems across different platforms."
+
+//   useEffect(() => {
+//     const handleMouseMove = (e) => {
+//       setMousePosition({
+//         x: (e.clientX / window.innerWidth) * 2 - 1,
+//         y: (e.clientY / window.innerHeight) * 2 - 1,
+//       })
+//     }
+//     window.addEventListener("mousemove", handleMouseMove)
+//     return () => window.removeEventListener("mousemove", handleMouseMove)
+//   }, [])
+
+//   // Terminal typing effect
+//   useEffect(() => {
+//     const timer = setTimeout(() => {
+//       let i = 0
+//       const typingInterval = setInterval(() => {
+//         if (i < fullTerminalText.length) {
+//           setTerminalText(fullTerminalText.slice(0, i + 1))
+//           i++
+//         } else {
+//           clearInterval(typingInterval)
+//         }
+//       }, 50)
+//       return () => clearInterval(typingInterval)
+//     }, 2000)
+
+//     return () => clearTimeout(timer)
+//   }, [])
+
+//   // Cursor blinking effect
+//   useEffect(() => {
+//     const cursorInterval = setInterval(() => {
+//       setShowCursor((prev) => !prev)
+//     }, 500)
+//     return () => clearInterval(cursorInterval)
+//   }, [])
+
+//   const socialLinks = [
+//     { icon: <Github className="w-5 h-5" />, href: "https://github.com/Slygriyrsk", label: "GitHub" },
+//     {
+//       icon: <Linkedin className="w-5 h-5" />,
+//       href: "https://www.linkedin.com/in/saharshkumar03/",
+//       label: "LinkedIn",
+//     },
+//     { icon: <Twitter className="w-5 h-5" />, href: "https://twitter.com/repatriation_23", label: "Twitter" },
+//   ]
+
+//   const binaryNumbers = ["01001000", "01100101", "01101100", "01101100", "01101111"]
+//   const techStack = [
+//     { name: "React", icon: "⚛️" },
+//     { name: "Node.js", icon: "🟢" },
+//     { name: "TypeScript", icon: "🔷" },
+//     { name: "Next.js", icon: "▲" },
+//     { name: "MongoDB", icon: "🍃" },
+//     { name: "Python", icon: "🐍" },
+//   ]
+
+//   const handleDownloadResume = () => {
+//     const link = document.createElement("a")
+//     link.href = "/assets/Saharsh_Resume.pdf"
+//     link.download = "Saharsh_Resume.pdf"
+//     document.body.appendChild(link)
+//     link.click()
+//     document.body.removeChild(link)
+//   }
+
+//   return (
+//     <section
+//       ref={containerRef}
+//       id="hero"
+//       className="relative min-h-screen flex items-center justify-center overflow-hidden py-20"
+//       style={{
+//         background: "linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f1419 75%, #000000 100%)",
+//       }}
+//     >
+//       {/* Matrix-style Background */}
+//       <div className="absolute inset-0">
+//         {/* Binary Rain Effect */}
+//         {[...Array(20)].map((_, i) => (
+//           <motion.div
+//             key={i}
+//             className="absolute text-green-400/20 font-mono text-xs"
+//             style={{
+//               left: `${Math.random() * 100}%`,
+//               top: `-10%`,
+//             }}
+//             animate={{
+//               y: ["0vh", "110vh"],
+//             }}
+//             transition={{
+//               duration: 8 + Math.random() * 4,
+//               repeat: Number.POSITIVE_INFINITY,
+//               delay: Math.random() * 5,
+//               ease: "linear",
+//             }}
+//           >
+//             {binaryNumbers[Math.floor(Math.random() * binaryNumbers.length)]}
+//           </motion.div>
+//         ))}
+
+//         {/* Glitch Grid */}
+//         <div
+//           className="absolute inset-0 opacity-[0.03]"
+//           style={{
+//             backgroundImage: `
+//               linear-gradient(rgba(0,255,0,0.1) 1px, transparent 1px),
+//               linear-gradient(90deg, rgba(0,255,0,0.1) 1px, transparent 1px)
+//             `,
+//             backgroundSize: "30px 30px",
+//           }}
+//         />
+
+//         {/* Ambient Orbs */}
+//         <motion.div
+//           className="absolute top-1/3 left-1/5 w-96 h-96 rounded-full opacity-10"
+//           style={{
+//             background: "radial-gradient(circle, rgba(0, 255, 0, 0.3) 0%, transparent 70%)",
+//             filter: "blur(60px)",
+//           }}
+//           animate={{
+//             x: mousePosition.x * 30,
+//             y: mousePosition.y * 30,
+//             scale: [1, 1.2, 1],
+//           }}
+//           transition={{
+//             x: { type: "spring", stiffness: 50, damping: 30 },
+//             y: { type: "spring", stiffness: 50, damping: 30 },
+//             scale: { duration: 6, repeat: Number.POSITIVE_INFINITY },
+//           }}
+//         />
+
+//         <motion.div
+//           className="absolute bottom-1/3 right-1/5 w-80 h-80 rounded-full opacity-10"
+//           style={{
+//             background: "radial-gradient(circle, rgba(0, 255, 255, 0.3) 0%, transparent 70%)",
+//             filter: "blur(60px)",
+//           }}
+//           animate={{
+//             x: mousePosition.x * -20,
+//             y: mousePosition.y * -20,
+//             scale: [1.1, 1, 1.1],
+//           }}
+//           transition={{
+//             x: { type: "spring", stiffness: 50, damping: 30 },
+//             y: { type: "spring", stiffness: 50, damping: 30 },
+//             scale: { duration: 8, repeat: Number.POSITIVE_INFINITY },
+//           }}
+//         />
+//       </div>
+
+//       {/* Main Content */}
+//       <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+//         <div className="text-center space-y-12">
+//           {/* Terminal Header */}
+//           <motion.div
+//             initial={{ opacity: 0, y: -30 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ duration: 0.8 }}
+//             className="flex items-center justify-center space-x-4 mb-8"
+//           >
+//             <div className="flex space-x-2">
+//               <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+//               <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+//               <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+//             </div>
+//             <div className="text-green-400 font-mono text-sm">~/saharsh-portfolio</div>
+//           </motion.div>
+
+//           {/* Status Badge */}
+//           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+//             <Badge className="px-6 py-3 bg-green-400/10 text-green-400 border border-green-400/20 backdrop-blur-xl hover:bg-green-400/20 transition-all duration-500 rounded-lg font-mono">
+//               <motion.div
+//                 className="w-2 h-2 bg-green-400 rounded-full mr-3"
+//                 animate={{ scale: [1, 1.2, 1], opacity: [1, 0.7, 1] }}
+//                 transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+//               />
+//               <Terminal className="w-4 h-4 mr-2" />
+//               <span>{"> status: available_for_opportunities"}</span>
+//             </Badge>
+//           </motion.div>
+
+//           {/* Main Content Grid */}
+//           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+//             {/* Left - Binary Art */}
+//             <motion.div
+//               initial={{ opacity: 0, x: -50 }}
+//               animate={{ opacity: 1, x: 0 }}
+//               transition={{ duration: 1, delay: 0.5 }}
+//               className="hidden lg:flex flex-col space-y-4"
+//             >
+//               {[...Array(8)].map((_, i) => (
+//                 <motion.div
+//                   key={i}
+//                   className="font-mono text-green-400/30 text-xs"
+//                   animate={{ opacity: [0.3, 0.7, 0.3] }}
+//                   transition={{ duration: 2, delay: i * 0.2, repeat: Number.POSITIVE_INFINITY }}
+//                 >
+//                   {Array.from({ length: 16 }, () => Math.round(Math.random())).join("")}
+//                 </motion.div>
+//               ))}
+//             </motion.div>
+
+//             {/* Center - Main Content */}
+//             <motion.div
+//               initial={{ opacity: 0, scale: 0.9 }}
+//               animate={{ opacity: 1, scale: 1 }}
+//               transition={{ duration: 1, delay: 0.7 }}
+//               className="space-y-8"
+//             >
+//               {/* Profile Image with Holographic Effect */}
+//               <div className="relative mx-auto w-48 h-48 lg:w-56 lg:h-56">
+//                 <motion.div
+//                   className="absolute inset-0 rounded-full"
+//                   style={{
+//                     background: "conic-gradient(from 0deg, #00ff00, #00ffff, #0080ff, #00ff00)",
+//                   }}
+//                   animate={{ rotate: 360 }}
+//                   transition={{ duration: 10, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+//                 >
+//                   <div className="absolute inset-1 rounded-full bg-black/90 backdrop-blur-xl border border-green-400/20">
+//                     <div className="w-full h-full rounded-full overflow-hidden p-2">
+//                       <img
+//                         src="/placeholder.svg?height=300&width=300"
+//                         alt="Saharsh Kumar"
+//                         className="w-full h-full object-cover rounded-full filter brightness-110 contrast-110"
+//                       />
+//                     </div>
+//                   </div>
+//                 </motion.div>
+
+//                 {/* Scanning Lines */}
+//                 <motion.div
+//                   className="absolute inset-0 rounded-full"
+//                   style={{
+//                     background: "linear-gradient(90deg, transparent 0%, rgba(0,255,0,0.1) 50%, transparent 100%)",
+//                   }}
+//                   animate={{ rotate: [0, 360] }}
+//                   transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+//                 />
+
+//                 {/* Corner Brackets */}
+//                 <div className="absolute -top-2 -left-2 w-6 h-6 border-l-2 border-t-2 border-green-400"></div>
+//                 <div className="absolute -top-2 -right-2 w-6 h-6 border-r-2 border-t-2 border-green-400"></div>
+//                 <div className="absolute -bottom-2 -left-2 w-6 h-6 border-l-2 border-b-2 border-green-400"></div>
+//                 <div className="absolute -bottom-2 -right-2 w-6 h-6 border-r-2 border-b-2 border-green-400"></div>
+//               </div>
+
+//               {/* Name and Title */}
+//               <div className="space-y-4">
+//                 <motion.h1
+//                   initial={{ opacity: 0, y: 30 }}
+//                   animate={{ opacity: 1, y: 0 }}
+//                   transition={{ delay: 1 }}
+//                   className="text-5xl lg:text-7xl font-bold text-white leading-none"
+//                   style={{
+//                     fontFamily: "'Orbitron', monospace",
+//                     textShadow: "0 0 20px rgba(0,255,0,0.3)",
+//                   }}
+//                 >
+//                   SAHARSH
+//                 </motion.h1>
+
+//                 <motion.div
+//                   initial={{ opacity: 0 }}
+//                   animate={{ opacity: 1 }}
+//                   transition={{ delay: 1.2 }}
+//                   className="text-green-400 font-mono text-lg"
+//                 >
+//                   {'> role: "Full-Stack Developer"'}
+//                 </motion.div>
+//               </div>
+//             </motion.div>
+
+//             {/* Right - Tech Stack */}
+//             <motion.div
+//               initial={{ opacity: 0, x: 50 }}
+//               animate={{ opacity: 1, x: 0 }}
+//               transition={{ duration: 1, delay: 0.5 }}
+//               className="hidden lg:flex flex-col space-y-3"
+//             >
+//               {techStack.map((tech, i) => (
+//                 <motion.div
+//                   key={tech.name}
+//                   className="flex items-center space-x-3 text-green-400/70 font-mono text-sm"
+//                   initial={{ opacity: 0, x: 20 }}
+//                   animate={{ opacity: 1, x: 0 }}
+//                   transition={{ delay: 1.5 + i * 0.1 }}
+//                   whileHover={{ x: 10, color: "#00ff00" }}
+//                 >
+//                   <span>{tech.icon}</span>
+//                   <span>{tech.name}</span>
+//                   <div className="flex-1 border-b border-dotted border-green-400/30"></div>
+//                 </motion.div>
+//               ))}
+//             </motion.div>
+//           </div>
+
+//           {/* Terminal Description */}
+//           <motion.div
+//             initial={{ opacity: 0, y: 30 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ delay: 1.8 }}
+//             className="max-w-4xl mx-auto"
+//           >
+//             <div className="bg-black/40 border border-green-400/20 rounded-lg p-6 backdrop-blur-xl">
+//               <div className="flex items-center space-x-2 mb-4">
+//                 <span className="text-green-400 font-mono">saharsh@portfolio:~$</span>
+//                 <span className="text-green-400 font-mono">cat about.txt</span>
+//               </div>
+//               <div className="text-green-300 font-mono text-sm lg:text-base leading-relaxed">
+//                 {terminalText}
+//                 {showCursor && <span className="bg-green-400 text-black px-1">|</span>}
+//               </div>
+//             </div>
+//           </motion.div>
+
+//           {/* Action Buttons */}
+//           <motion.div
+//             initial={{ opacity: 0, y: 20 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ delay: 2.5 }}
+//             className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+//           >
+//             <Button
+//               asChild
+//               size="lg"
+//               className="group bg-green-400 text-black hover:bg-green-300 font-mono font-bold px-8 py-4 rounded-lg shadow-2xl hover:shadow-green-400/20 transition-all duration-500"
+//             >
+//               <Link to="contact" smooth={true} duration={500}>
+//                 <Terminal className="w-5 h-5 mr-3" />
+//                 ./connect.sh
+//                 <motion.div
+//                   className="ml-3"
+//                   animate={{ x: [0, 5, 0] }}
+//                   transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+//                 >
+//                   <Rocket className="w-5 h-5" />
+//                 </motion.div>
+//               </Link>
+//             </Button>
+
+//             <Button
+//               onClick={handleDownloadResume}
+//               variant="outline"
+//               size="lg"
+//               className="bg-transparent border-2 border-green-400/40 text-green-400 hover:bg-green-400/10 hover:border-green-400 font-mono font-bold px-8 py-4 rounded-lg backdrop-blur-xl transition-all duration-500"
+//             >
+//               <ArrowDown className="w-5 h-5 mr-3" />
+//               download resume.pdf
+//             </Button>
+//           </motion.div>
+
+//           {/* Social Links */}
+//           <motion.div
+//             initial={{ opacity: 0, y: 20 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ delay: 2.7 }}
+//             className="flex items-center justify-center space-x-8"
+//           >
+//             <span className="text-green-400/70 font-mono text-sm">{"> social_links:"}</span>
+//             <div className="flex space-x-4">
+//               {socialLinks.map((link, index) => (
+//                 <TooltipProvider key={index}>
+//                   <Tooltip>
+//                     <TooltipTrigger asChild>
+//                       <motion.a
+//                         href={link.href}
+//                         target="_blank"
+//                         rel="noopener noreferrer"
+//                         className="w-12 h-12 bg-green-400/10 hover:bg-green-400/20 rounded-lg flex items-center justify-center text-green-400/70 hover:text-green-400 transition-all duration-500 backdrop-blur-xl border border-green-400/20 hover:border-green-400/40"
+//                         whileHover={{ scale: 1.1, y: -2 }}
+//                         whileTap={{ scale: 0.95 }}
+//                         initial={{ opacity: 0, y: 20 }}
+//                         animate={{ opacity: 1, y: 0 }}
+//                         transition={{ delay: 2.9 + index * 0.1 }}
+//                       >
+//                         {link.icon}
+//                       </motion.a>
+//                     </TooltipTrigger>
+//                     <TooltipContent side="bottom" className="bg-black border-green-400/20 text-green-400">
+//                       <p className="font-mono">{link.label}</p>
+//                     </TooltipContent>
+//                   </Tooltip>
+//                 </TooltipProvider>
+//               ))}
+//             </div>
+//           </motion.div>
+//         </div>
+
+//         {/* Scroll Indicator */}
+//         <motion.div
+//           initial={{ opacity: 0, y: 20 }}
+//           animate={{ opacity: 1, y: 0 }}
+//           transition={{ delay: 3 }}
+//           className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+//         >
+//           <Link to="about" smooth={true} duration={500} className="cursor-pointer">
+//             <motion.div
+//               animate={{ y: [0, 8, 0] }}
+//               transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2.5, ease: "easeInOut" }}
+//               className="w-12 h-12 bg-green-400/10 hover:bg-green-400/20 rounded-lg flex items-center justify-center backdrop-blur-xl border border-green-400/20 hover:border-green-400/40 transition-all duration-500"
+//             >
+//               <ArrowDown className="w-5 h-5 text-green-400/70" />
+//             </motion.div>
+//           </Link>
+//         </motion.div>
+//       </motion.div>
+//     </section>
+//   )
+// }
+
+// export default Hero
